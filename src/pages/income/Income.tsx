@@ -3,7 +3,7 @@ import Page from '@components/Page';
 import { useTranslation } from 'react-i18next';
 import IncomeList from './IncomeList';
 import IncomeChart from './IncomeChart';
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 import AddIncome from './AddIncome';
 import type { AddIncomeType, IncomeType } from 'types/income.type';
 import { getIncomeList, saveIncomeList } from '@utils/income.util';
@@ -65,18 +65,6 @@ const Income = () => {
         setEditingIncome(income);
         setIsAddIncomeDialogOpen(true);
     };
-
-    const dialogInitialValues = useMemo(() => {
-        if (!editingIncome) {
-            return undefined;
-        }
-        return {
-            incomeSource: editingIncome.incomeSource,
-            amount: editingIncome.amount,
-            dateReceived: new Date(editingIncome.dateReceived),
-            notes: editingIncome.notes,
-        };
-    }, [editingIncome]);
 
     return (
         <Page title={t('yourIncomeSources')}>

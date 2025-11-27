@@ -13,18 +13,45 @@ const Expense = () => {
     const [expenseList, setExpenseList] =
         useState<ExpenseType[]>(getExpenseList());
     const [isAddExpenseDialogOpen, setIsAddExpenseDialogOpen] = useState(false);
+    const [editingExpense, setEditingExpense] = useState<ExpenseType | null>(
+        null
+    );
 
-    const handleAddExpense = (data: AddExpenseType) => {
+    const handleEditExpense = (expense: ExpenseType) => {
+        setIsAddExpenseDialogOpen(true);
+        setEditingExpense(expense);
+    };
+
+    const handleDialogClose = () => {
         setIsAddExpenseDialogOpen(false);
-        const newExpense = {
-            ...data,
-            id: uuid(),
-            createdAt: new Date(),
-            updatedAt: new Date(),
-        };
-        const updatedExpenseList = [...expenseList, newExpense];
+        setEditingExpense(null);
+    };
+
+    const handleSubmitExpense = (data: AddExpenseType) => {
+        let updatedExpenseList: ExpenseType[];
+        if (editingExpense) {
+            updatedExpenseList = expenseList.map((expense) =>
+                expense.id === editingExpense.id
+                    ? {
+                          ...expense,
+                          ...data,
+                          dateReceived: data.date,
+                          updatedAt: new Date(),
+                      }
+                    : expense
+            );
+        } else {
+            const newExpense: ExpenseType = {
+                id: uuid(),
+                createdAt: new Date(),
+                updatedAt: new Date(),
+                ...data,
+            };
+            updatedExpenseList = [newExpense, ...expenseList];
+        }
         setExpenseList(updatedExpenseList);
         saveExpenseList(updatedExpenseList);
+        handleDialogClose();
     };
 
     const handleDeleteExpense = (id: string) => {
@@ -66,12 +93,14 @@ const Expense = () => {
                     <ExpensesList
                         expenseList={expenseList}
                         handleDeleteExpense={handleDeleteExpense}
+                        handleEditExpense={handleEditExpense}
                     />
                     {isAddExpenseDialogOpen && (
                         <AddExpense
                             open={isAddExpenseDialogOpen}
                             onClose={() => setIsAddExpenseDialogOpen(false)}
-                            handleAddExpense={handleAddExpense}
+                            handleAddExpense={handleSubmitExpense}
+                            expense={editingExpense ?? undefined}
                         />
                     )}
                 </Box>

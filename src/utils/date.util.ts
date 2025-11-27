@@ -5,3 +5,11 @@ export const parseDate = (date: Date | string): Date => {
     }
     return new Date(date);
 };
+
+export const formatDateForInput = (value?: Date | string): string => {
+    if (!value) {
+        return '';
+    }
+    const date = parseDate(value);
+    return date.toISOString().slice(0, 10);
+};

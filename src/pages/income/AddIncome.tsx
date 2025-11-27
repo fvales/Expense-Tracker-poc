@@ -7,6 +7,7 @@ import TextFieldControl from '@components/TextFieldControl';
 import type { AddIncomeType, IncomeType } from 'types/income.type';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useEffect, useMemo, type FC } from 'react';
+import { formatDateForInput } from '@utils/date.util';
 
 type AddIncomeFormValues = Omit<AddIncomeType, 'dateReceived'> & {
     dateReceived: string;
@@ -18,17 +19,6 @@ interface IAddIncomeProps extends Omit<IPopupDialogProps, 'onSubmit'> {
     initialValues?: IncomeType;
     mode?: 'add' | 'edit';
 }
-
-const formatDateForInput = (value?: Date | string): string => {
-    if (!value) {
-        return '';
-    }
-    const date = value instanceof Date ? value : new Date(value);
-    if (Number.isNaN(date.getTime())) {
-        return '';
-    }
-    return date.toISOString().slice(0, 10);
-};
 
 const getDefaultValues = (
     initialValues?: AddIncomeType

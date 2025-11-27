@@ -3,24 +3,28 @@ import { useTranslation } from 'react-i18next';
 import * as yup from 'yup';
 import { useForm } from 'react-hook-form';
 import { Grid } from '@mui/material';
-import type { FC } from 'react';
+import { useEffect, type FC } from 'react';
 import TextFieldControl from '@components/TextFieldControl';
-import type { AddExpenseType, Category } from 'types/expense.type';
+import type { AddExpenseType, Category, ExpenseType } from 'types/expense.type';
 import { yupResolver } from '@hookform/resolvers/yup';
 import SelectControl from '@components/SelectControl';
 import { CategoryOptions } from 'constants/addexpense.constant';
+import { parseDate } from '@utils/date.util';
 
 interface IAddExpenseProps extends IPopupDialogProps {
     open: boolean;
     handleAddExpense: (data: AddExpenseType) => void;
+    expense?: ExpenseType;
 }
 
 const AddExpense: FC<IAddExpenseProps> = ({
     open,
     handleAddExpense,
     onClose,
+    expense,
 }) => {
     const { t } = useTranslation();
+    const isEditMode = !!expense;
 
     const validationSchema = yup.object({
         description: yup
@@ -47,15 +51,37 @@ const AddExpense: FC<IAddExpenseProps> = ({
         control,
         handleSubmit,
         formState: { isValid },
+        reset,
     } = useForm<AddExpenseType>({
         mode: 'all',
         resolver: yupResolver(validationSchema),
+        defaultValues: isEditMode
+            ? {
+                  description: expense.description,
+                  amount: expense.amount,
+                  date: parseDate(expense.date),
+                  category: expense.category,
+              }
+            : undefined,
     });
+
+    useEffect(() => {
+        if (isEditMode) {
+            reset({
+                description: expense.description,
+                amount: expense.amount,
+                date: parseDate(expense.date),
+                category: expense.category,
+            });
+        }
+    }, [isEditMode, reset, expense]);
 
     return (
         <PopupDialog
             open={open}
-            title={t('addIncomeSource.title')}
+            title={
+                isEditMode ? t('editExpense.title') : t('addIncomeSource.title')
+            }
             onClose={onClose}
             isSubmitDisabled={!isValid}
             onSubmit={handleSubmit(handleAddExpense)}
