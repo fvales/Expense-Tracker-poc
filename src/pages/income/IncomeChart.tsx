@@ -3,8 +3,6 @@ import { BarChart } from '@mui/x-charts/BarChart';
 import type { FC } from 'react';
 import type { IncomeType } from 'types/income.type';
 import { useMemo } from 'react';
-import { parseDate } from '@utils/date.util';
-import { useTranslation } from 'react-i18next';
 
 interface IIncomeChartProps {
     incomeList: IncomeType[];
@@ -18,7 +16,14 @@ interface ChartData {
 }
 
 const IncomeChart: FC<IIncomeChartProps> = ({ incomeList }) => {
-    const { t } = useTranslation();
+    // Helper function to parse date (handles both Date objects and ISO strings from localStorage)
+    const parseDate = (date: Date | string): Date => {
+        if (date instanceof Date) {
+            return date;
+        }
+        return new Date(date);
+    };
+
     // Group income by month and calculate totals
     const chartData = useMemo((): ChartData[] => {
         if (incomeList.length === 0) {
@@ -72,7 +77,7 @@ const IncomeChart: FC<IIncomeChartProps> = ({ incomeList }) => {
                 }}
             >
                 <Typography variant="h6" color="text.secondary">
-                    {t('noIncomeDataAvailable')}
+                    No income data available for chart
                 </Typography>
             </Box>
         );
@@ -81,7 +86,7 @@ const IncomeChart: FC<IIncomeChartProps> = ({ incomeList }) => {
     return (
         <Box sx={{ width: '100%', height: '400px', p: 2 }}>
             <Typography variant="h6" gutterBottom sx={{ mb: 2 }}>
-                {t('monthlyIncomeOverview')}
+                Monthly Income Overview
             </Typography>
             <Box sx={{ width: '100%', height: '350px' }}>
                 <BarChart
@@ -90,12 +95,12 @@ const IncomeChart: FC<IIncomeChartProps> = ({ incomeList }) => {
                         {
                             dataKey: 'month',
                             scaleType: 'band',
-                            label: t('month'),
+                            label: 'Month',
                         },
                     ]}
                     yAxis={[
                         {
-                            label: `${t('amount')} (₹)`,
+                            label: 'Amount ($)',
                             valueFormatter: (value: number) =>
                                 `$${value.toLocaleString('en-US', {
                                     maximumFractionDigits: 0,
@@ -105,7 +110,7 @@ const IncomeChart: FC<IIncomeChartProps> = ({ incomeList }) => {
                     series={[
                         {
                             dataKey: 'amount',
-                            label: t('monthlyIncome'),
+                            label: 'Monthly Income',
                             valueFormatter: (value: number | null) =>
                                 value !== null
                                     ? `$${value.toLocaleString('en-US', {
