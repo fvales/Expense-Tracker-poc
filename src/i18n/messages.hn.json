@@ -1,0 +1,49 @@
+{
+    "dashboard": "डैशबोर्ड",
+    "income": "आय",
+    "expenses": "खर्च",
+    "reports": "रिपोर्ट",
+    "monthlyOverview": "मासिक अवलोकन",
+    "totalIncomeThisMonth": "इस महीने की कुल आय",
+    "totalExpensesThisMonth": "इस महीने के कुल खर्च",
+    "netBalance": "शुद्ध बैलेंस",
+    "edit": "संपादित करें",
+    "delete": "हटाएं",
+    "incomeSource": "आय स्रोत",
+    "amount": "राशि",
+    "dateReceived": "प्राप्ति तिथि",
+    "notes": "नोट्स",
+    "incomeSources": "आय स्रोत",
+    "yourIncomeSources": "आपके आय स्रोत",
+    "addNewIncomeSource": "नया आय स्रोत जोड़ें",
+    "submit": "जमा करें",
+    "close": "बंद करें",
+    "fieldIsMandatory": "{{field}} फ़ील्ड अनिवार्य है",
+    "noIncomeDataAvailable": "चार्ट के लिए कोई आय डेटा उपलब्ध नहीं है",
+    "month": "महीना",
+    "monthlyIncome": "मासिक आय",
+    "monthlyIncomeOverview": "मासिक आय अवलोकन",
+    "addIncomeSource": {
+        "title": "नया लेनदेन जोड़ें",
+        "incomeSource": "आय स्रोत",
+        "amount": "राशि",
+        "dateReceived": "प्राप्ति तिथि",
+        "notes": "नोट्स"
+    },
+    "addExpense": {
+        "description": "विवरण",
+        "category": "श्रेणी",
+        "date": "तारीख",
+        "amount": "राशि"
+    },
+    "category": {
+        "food": "भोजन",
+        "travel": "यातायात",
+        "utilities": "उपयोगिताएं",
+        "entertainment": "मनोरंजन",
+        "shopping": "खरीदारी",
+        "health": "स्वास्थ्य",
+        "education": "शिक्षा",
+        "others": "अन्य"
+    }
+}

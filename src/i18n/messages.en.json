@@ -1,0 +1,49 @@
+{
+    "dashboard": "Dashboard",
+    "income": "Income",
+    "expenses": "Expenses",
+    "reports": "Reports",
+    "monthlyOverview": "Monthly Overview",
+    "totalIncomeThisMonth": "Total Income This Month",
+    "totalExpensesThisMonth": "Total Expenses This Month",
+    "netBalance": "Net Balance",
+    "edit": "Edit",
+    "delete": "Delete",
+    "incomeSource": "Income Source",
+    "amount": "Amount",
+    "dateReceived": "Date Received",
+    "notes": "Notes",
+    "yourIncomeSources": "Your Income Sources",
+    "incomeSources": "Income Sources",
+    "addNewIncomeSource": "Add New Income Source",
+    "close": "Close",
+    "submit": "Submit",
+    "fieldIsMandatory": "{{field}} field is mandatory",
+    "noIncomeDataAvailable": "No income data available for chart",
+    "month": "Month",
+    "monthlyIncome": "Monthly Income",
+    "monthlyIncomeOverview": "Monthly Income Overview",
+    "addIncomeSource": {
+        "title": "Add New Transaction",
+        "incomeSource": "Income Source",
+        "amount": "Amount",
+        "dateReceived": "Date Received",
+        "notes": "Notes"
+    },
+    "addExpense": {
+        "description": "Description",
+        "category": "Category",
+        "date": "Date",
+        "amount": "Amount"
+    },
+    "category": {
+        "food": "Food",
+        "travel": "Travel",
+        "utilities": "Utilities",
+        "entertainment": "Entertainment",
+        "shopping": "Shopping",
+        "health": "Health",
+        "education": "Education",
+        "others": "Others"
+    }
+}
