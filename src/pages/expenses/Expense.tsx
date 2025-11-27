@@ -7,6 +7,7 @@ import ExpensesList from './ExpensesList';
 import { useTranslation } from 'react-i18next';
 import { getExpenseList, saveExpenseList } from '@utils/expense.util';
 import { v4 as uuid } from 'uuid';
+import CustomBarChart from '@components/CustomBarChart';
 
 const Expense = () => {
     const { t } = useTranslation();
@@ -35,7 +36,7 @@ const Expense = () => {
                     ? {
                           ...expense,
                           ...data,
-                          dateReceived: data.date,
+                          date: data.date,
                           updatedAt: new Date(),
                       }
                     : expense
@@ -65,6 +66,11 @@ const Expense = () => {
     return (
         <Page title="Your Expenses">
             <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+                <CustomBarChart
+                    list={expenseList}
+                    chartHeader={t('monthlyExpenseOverview')}
+                    seriesLabel={t('monthlyExpense')}
+                />
                 <Box
                     sx={{
                         boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)',

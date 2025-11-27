@@ -9,8 +9,8 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useEffect, useMemo, type FC } from 'react';
 import { formatDateForInput } from '@utils/date.util';
 
-type AddIncomeFormValues = Omit<AddIncomeType, 'dateReceived'> & {
-    dateReceived: string;
+type AddIncomeFormValues = Omit<AddIncomeType, 'date'> & {
+    date: string;
 };
 
 interface IAddIncomeProps extends Omit<IPopupDialogProps, 'onSubmit'> {
@@ -25,7 +25,7 @@ const getDefaultValues = (
 ): AddIncomeFormValues => ({
     incomeSource: initialValues?.incomeSource ?? '',
     amount: initialValues?.amount ?? 0,
-    dateReceived: formatDateForInput(initialValues?.dateReceived),
+    date: formatDateForInput(initialValues?.date),
     notes: initialValues?.notes ?? '',
 });
 
@@ -56,9 +56,9 @@ const AddIncome: FC<IAddIncomeProps> = ({
                 t('fieldIsMandatory', { field: t('addIncomeSource.amount') })
             )
             .min(0),
-        dateReceived: yup.string().required(
+        date: yup.string().required(
             t('fieldIsMandatory', {
-                field: t('addIncomeSource.dateReceived'),
+                field: t('addIncomeSource.date'),
             })
         ),
         notes: yup
@@ -93,7 +93,7 @@ const AddIncome: FC<IAddIncomeProps> = ({
         onSubmit({
             ...values,
             amount: Number(values.amount),
-            dateReceived: new Date(values.dateReceived),
+            date: new Date(values.date),
         });
     };
 
@@ -126,8 +126,8 @@ const AddIncome: FC<IAddIncomeProps> = ({
                             </Grid>
                             <Grid size={{ xs: 6, md: 6 }}>
                                 <TextFieldControl
-                                    label={t('addIncomeSource.dateReceived')}
-                                    name="dateReceived"
+                                    label={t('addIncomeSource.date')}
+                                    name="date"
                                     control={control}
                                     type="date"
                                     slotProps={{

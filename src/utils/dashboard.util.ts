@@ -16,7 +16,7 @@ export const calculateMonthlyOverview = (
 ): OverviewData => {
     const totalIncome = incomeList
         .filter((income) => {
-            const date = parseDate(income.dateReceived);
+            const date = parseDate(income.date);
             return (
                 date.getMonth() === currentMonth &&
                 date.getFullYear() === currentYear

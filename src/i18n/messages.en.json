@@ -19,10 +19,12 @@
     "close": "Close",
     "submit": "Submit",
     "fieldIsMandatory": "{{field}} field is mandatory",
-    "noIncomeDataAvailable": "No income data available for chart",
+    "noDataAvailable": "No data available for chart",
     "month": "Month",
     "monthlyIncome": "Monthly Income",
     "monthlyIncomeOverview": "Monthly Income Overview",
+    "monthlyExpense": "Monthly Expense",
+    "monthlyExpenseOverview": "Monthly Expense Overview",
     "addIncomeSource": {
         "title": "Add New Transaction",
         "incomeSource": "Income Source",

@@ -23,9 +23,9 @@ const IncomeCard: FC<IIncomeCardProps> = ({
     handleEditIncome,
 }) => {
     const { t } = useTranslation();
-    const date = new Date(income.dateReceived);
+    const date = new Date(income.date);
     const formattedDate = Number.isNaN(date.getTime())
-        ? t('dateReceived')
+        ? t('date')
         : date.toLocaleDateString(undefined, {
               year: 'numeric',
               month: 'short',
@@ -63,7 +63,7 @@ const IncomeCard: FC<IIncomeCardProps> = ({
                     </Grid>
                     <Grid>
                         <Typography variant="h6" color="text.secondary">
-                            {t('dateReceived')}
+                            {t('date')}
                         </Typography>
                         <Typography>{formattedDate}</Typography>
                     </Grid>

@@ -1,46 +1,41 @@
 import { Box, Typography } from '@mui/material';
 import { BarChart } from '@mui/x-charts/BarChart';
 import type { FC } from 'react';
-import type { IncomeType } from 'types/income.type';
 import { useMemo } from 'react';
+import { parseDate } from '@utils/date.util';
+import { t } from 'i18next';
 
-interface IIncomeChartProps {
-    incomeList: IncomeType[];
-}
+type ChartProps = {
+    list: { date: Date; amount: number }[];
+    chartHeader: string;
+    seriesLabel: string;
+};
 
-interface ChartData {
+type ChartData = {
     month: string;
     amount: number;
     monthIndex: number;
     [key: string]: string | number;
-}
+};
 
-const IncomeChart: FC<IIncomeChartProps> = ({ incomeList }) => {
-    // Helper function to parse date (handles both Date objects and ISO strings from localStorage)
-    const parseDate = (date: Date | string): Date => {
-        if (date instanceof Date) {
-            return date;
-        }
-        return new Date(date);
-    };
-
-    // Group income by month and calculate totals
+const CustomBarChart: FC<ChartProps> = ({ list, chartHeader, seriesLabel }) => {
+    // Group by month and calculate totals
     const chartData = useMemo((): ChartData[] => {
-        if (incomeList.length === 0) {
+        if (list.length === 0) {
             return [];
         }
 
         // Create a map to store monthly totals
         const monthlyData = new Map<string, number>();
 
-        incomeList.forEach((income) => {
-            const date = parseDate(income.dateReceived);
+        list.forEach((item) => {
+            const date = parseDate(item.date);
             const year = date.getFullYear();
             const month = date.getMonth(); // 0-11
             const monthKey = `${year}-${month}`;
 
             const currentAmount = monthlyData.get(monthKey) || 0;
-            monthlyData.set(monthKey, currentAmount + income.amount);
+            monthlyData.set(monthKey, currentAmount + item.amount);
         });
 
         // Convert to array and sort by date
@@ -62,7 +57,7 @@ const IncomeChart: FC<IIncomeChartProps> = ({ incomeList }) => {
 
         // Show last 12 months (or all if less than 12)
         return processedData.slice(-12);
-    }, [incomeList]);
+    }, [list]);
 
     // Empty state
     if (chartData.length === 0) {
@@ -77,7 +72,7 @@ const IncomeChart: FC<IIncomeChartProps> = ({ incomeList }) => {
                 }}
             >
                 <Typography variant="h6" color="text.secondary">
-                    No income data available for chart
+                    {t('noDataAvailable')}
                 </Typography>
             </Box>
         );
@@ -86,7 +81,7 @@ const IncomeChart: FC<IIncomeChartProps> = ({ incomeList }) => {
     return (
         <Box sx={{ width: '100%', height: '400px', p: 2 }}>
             <Typography variant="h6" gutterBottom sx={{ mb: 2 }}>
-                Monthly Income Overview
+                {chartHeader}
             </Typography>
             <Box sx={{ width: '100%', height: '350px' }}>
                 <BarChart
@@ -95,14 +90,14 @@ const IncomeChart: FC<IIncomeChartProps> = ({ incomeList }) => {
                         {
                             dataKey: 'month',
                             scaleType: 'band',
-                            label: 'Month',
+                            label: t('month'),
                         },
                     ]}
                     yAxis={[
                         {
-                            label: 'Amount ($)',
+                            label: `${t('amount')}₹`,
                             valueFormatter: (value: number) =>
-                                `$${value.toLocaleString('en-US', {
+                                `₹${value.toLocaleString('en-US', {
                                     maximumFractionDigits: 0,
                                 })}`,
                         },
@@ -110,7 +105,7 @@ const IncomeChart: FC<IIncomeChartProps> = ({ incomeList }) => {
                     series={[
                         {
                             dataKey: 'amount',
-                            label: 'Monthly Income',
+                            label: seriesLabel,
                             valueFormatter: (value: number | null) =>
                                 value !== null
                                     ? `$${value.toLocaleString('en-US', {
@@ -138,4 +133,4 @@ const IncomeChart: FC<IIncomeChartProps> = ({ incomeList }) => {
     );
 };
 
-export default IncomeChart;
+export default CustomBarChart;

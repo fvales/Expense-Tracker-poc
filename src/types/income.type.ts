@@ -1,7 +1,7 @@
 export type AddIncomeType = {
     incomeSource: string;
     amount: number;
-    dateReceived: Date;
+    date: Date;
     notes: string;
 };
 

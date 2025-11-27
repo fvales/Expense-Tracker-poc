@@ -12,7 +12,6 @@ import {
 } from '@mui/material';
 import i18n from '@i18n/i18n';
 import dashboard from '@mui/icons-material/Dashboard';
-import Assessment from '@mui/icons-material/Assessment';
 import AttachMoney from '@mui/icons-material/AttachMoney';
 import MoneyOff from '@mui/icons-material/MoneyOff';
 import { NavLink } from 'react-router';
@@ -33,11 +32,6 @@ const sideNavItems = [
         name: i18n.t('expenses'),
         icon: MoneyOff,
         path: '/expense',
-    },
-    {
-        name: i18n.t('reports'),
-        icon: Assessment,
-        path: '/report',
     },
 ];
 

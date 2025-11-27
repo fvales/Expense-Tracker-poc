@@ -2,12 +2,12 @@ import { Box, Button, Stack, styled, Typography } from '@mui/material';
 import Page from '@components/Page';
 import { useTranslation } from 'react-i18next';
 import IncomeList from './IncomeList';
-import IncomeChart from './IncomeChart';
 import { useState } from 'react';
 import AddIncome from './AddIncome';
 import type { AddIncomeType, IncomeType } from 'types/income.type';
 import { getIncomeList, saveIncomeList } from '@utils/income.util';
 import { v4 as uuid } from 'uuid';
+import CustomBarChart from '@components/CustomBarChart';
 
 const StyledBox = styled(Box)(() => ({
     boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)',
@@ -34,7 +34,7 @@ const Income = () => {
                     ? {
                           ...income,
                           ...data,
-                          dateReceived: data.dateReceived,
+                          date: data.date,
                           updatedAt: new Date(),
                       }
                     : income
@@ -70,7 +70,11 @@ const Income = () => {
         <Page title={t('yourIncomeSources')}>
             <Stack spacing={2}>
                 <StyledBox>
-                    <IncomeChart incomeList={incomeList} />
+                    <CustomBarChart
+                        list={incomeList}
+                        chartHeader={t('monthlyIncomeOverview')}
+                        seriesLabel={t('monthlyIncome')}
+                    />
                 </StyledBox>
 
                 <StyledBox>
