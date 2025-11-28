@@ -95,7 +95,7 @@ const CustomBarChart: FC<ChartProps> = ({ list, chartHeader, seriesLabel }) => {
                     ]}
                     yAxis={[
                         {
-                            label: `${t('amount')}₹`,
+                            label: `${t('amount')} (₹)`,
                             valueFormatter: (value: number) =>
                                 `₹${value.toLocaleString('en-US', {
                                     maximumFractionDigits: 0,
@@ -108,7 +108,7 @@ const CustomBarChart: FC<ChartProps> = ({ list, chartHeader, seriesLabel }) => {
                             label: seriesLabel,
                             valueFormatter: (value: number | null) =>
                                 value !== null
-                                    ? `$${value.toLocaleString('en-US', {
+                                    ? `₹${value.toLocaleString('en-US', {
                                           minimumFractionDigits: 2,
                                           maximumFractionDigits: 2,
                                       })}`

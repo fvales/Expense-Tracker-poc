@@ -4,6 +4,7 @@ import '@i18n/i18n';
 import App from './App';
 import { AppThemeProvider } from 'contexts/AppThemeContext';
 import { HelmetProvider, Helmet } from 'react-helmet-async';
+import { ConfirmProvider } from 'material-ui-confirm';
 
 const rootEl = document.getElementById('root');
 if (rootEl) {
@@ -12,8 +13,10 @@ if (rootEl) {
         <React.StrictMode>
             <HelmetProvider>
                 <AppThemeProvider>
-                    <Helmet title="%s | FinCat" defaultTitle="FinCat" />
-                    <App />
+                    <ConfirmProvider>
+                        <Helmet titleTemplate="%s | FinCat" defaultTitle="FinCat" />
+                        <App />
+                    </ConfirmProvider>
                 </AppThemeProvider>
             </HelmetProvider>
         </React.StrictMode>

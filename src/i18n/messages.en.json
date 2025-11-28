@@ -19,6 +19,7 @@
     "yourExpenses": "Your Expenses",
     "addNewExpense": "Add New Expense",
     "close": "Close",
+    "cancel": "Cancel",
     "submit": "Submit",
     "fieldIsMandatory": "{{field}} field is mandatory",
     "noDataAvailable": "No data available for chart",
@@ -46,6 +47,14 @@
     },
     "editExpense": {
         "title": "Edit Expense"
+    },
+    "confirmDeleteIncome": {
+        "title": "Delete this income entry?",
+        "description": "This action cannot be undone. The income entry will be permanently removed."
+    },
+    "confirmDeleteExpense": {
+        "title": "Delete this expense entry?",
+        "description": "This action cannot be undone. The expense entry will be permanently removed."
     },
     "category": {
         "food": "Food",

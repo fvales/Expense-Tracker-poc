@@ -8,9 +8,11 @@ import { useTranslation } from 'react-i18next';
 import { getExpenseList, saveExpenseList } from '@utils/expense.util';
 import { v4 as uuid } from 'uuid';
 import CustomBarChart from '@components/CustomBarChart';
+import { useConfirm } from 'material-ui-confirm';
 
 const Expense = () => {
     const { t } = useTranslation();
+    const confirm = useConfirm();
     const [expenseList, setExpenseList] =
         useState<ExpenseType[]>(getExpenseList());
     const [isAddExpenseDialogOpen, setIsAddExpenseDialogOpen] = useState(false);
@@ -55,12 +57,22 @@ const Expense = () => {
         handleDialogClose();
     };
 
-    const handleDeleteExpense = (id: string) => {
-        const updatedExpenseList = expenseList.filter(
-            (expense) => expense.id !== id
-        );
-        setExpenseList(updatedExpenseList);
-        saveExpenseList(updatedExpenseList);
+    const handleDeleteExpense = async (id: string) => {
+        const { confirmed } = await confirm({
+            title: t('confirmDeleteExpense.title'),
+            description: t('confirmDeleteExpense.description'),
+            confirmationText: t('delete'),
+            cancellationText: t('cancel'),
+            confirmationButtonProps: { color: 'error' },
+        });
+
+        if (confirmed) {
+            const updatedExpenseList = expenseList.filter(
+                (expense) => expense.id !== id
+            );
+            setExpenseList(updatedExpenseList);
+            saveExpenseList(updatedExpenseList);
+        }
     };
 
     return (

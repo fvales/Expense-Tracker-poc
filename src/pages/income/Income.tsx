@@ -8,6 +8,7 @@ import type { AddIncomeType, IncomeType } from 'types/income.type';
 import { getIncomeList, saveIncomeList } from '@utils/income.util';
 import { v4 as uuid } from 'uuid';
 import CustomBarChart from '@components/CustomBarChart';
+import { useConfirm } from 'material-ui-confirm';
 
 const StyledBox = styled(Box)(() => ({
     boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)',
@@ -17,6 +18,7 @@ const StyledBox = styled(Box)(() => ({
 
 const Income = () => {
     const { t } = useTranslation();
+    const confirm = useConfirm();
     const [isAddIncomeDialogOpen, setIsAddIncomeDialogOpen] = useState(false);
     const [incomeList, setIncomeList] = useState<IncomeType[]>(getIncomeList());
     const [editingIncome, setEditingIncome] = useState<IncomeType | null>(null);
@@ -53,12 +55,22 @@ const Income = () => {
         handleDialogClose();
     };
 
-    const handleDeleteIncome = (id: string) => {
-        const updatedIncomeList = incomeList.filter(
-            (income) => income.id !== id
-        );
-        setIncomeList(updatedIncomeList);
-        saveIncomeList(updatedIncomeList);
+    const handleDeleteIncome = async (id: string) => {
+        const { confirmed } = await confirm({
+            title: t('confirmDeleteIncome.title'),
+            description: t('confirmDeleteIncome.description'),
+            confirmationText: t('delete'),
+            cancellationText: t('cancel'),
+            confirmationButtonProps: { color: 'error' },
+        });
+
+        if (confirmed) {
+            const updatedIncomeList = incomeList.filter(
+                (income) => income.id !== id
+            );
+            setIncomeList(updatedIncomeList);
+            saveIncomeList(updatedIncomeList);
+        }
     };
 
     const handleEditIncome = (income: IncomeType) => {

@@ -6,6 +6,7 @@ import {
     FormControlLabel,
 } from '@mui/material';
 import type { ChangeEvent, FC, ReactNode } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
 
 interface IPageProps {
@@ -34,6 +35,7 @@ const Page: FC<IPageProps> = ({ children, title }) => {
                     mb: 2,
                 }}
             >
+                <Helmet title={title} />
                 <Typography variant="h4" gutterBottom sx={{ m: 0 }}>
                     {title}
                 </Typography>
