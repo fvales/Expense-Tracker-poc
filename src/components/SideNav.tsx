@@ -72,7 +72,11 @@ const SideNav = () => {
                 <Box>
                     <Typography variant="h6" sx={{ p: 2 }}>
                         <StyledLogo
-                            src="images/logo_light.svg"
+                            src={
+                                isDarkMode
+                                    ? 'images/logo_dark.svg'
+                                    : 'images/logo_light.svg'
+                            }
                             alt="FinCat Logo"
                         />
                         FinCat
