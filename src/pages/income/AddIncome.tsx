@@ -7,7 +7,7 @@ import TextFieldControl from '@components/TextFieldControl';
 import type { AddIncomeType, IncomeType } from 'types/income.type';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useEffect, useMemo, type FC } from 'react';
-import { formatDateForInput } from '@utils/date.util';
+import { formatDateForInput, parseDate } from '@utils/date.util';
 
 type AddIncomeFormValues = Omit<AddIncomeType, 'date'> & {
     date: string;
@@ -16,27 +16,24 @@ type AddIncomeFormValues = Omit<AddIncomeType, 'date'> & {
 interface IAddIncomeProps extends Omit<IPopupDialogProps, 'onSubmit'> {
     open: boolean;
     onSubmit: (data: AddIncomeType) => void;
-    initialValues?: IncomeType;
-    mode?: 'add' | 'edit';
+    income?: IncomeType;
 }
 
-const getDefaultValues = (
-    initialValues?: AddIncomeType
-): AddIncomeFormValues => ({
-    incomeSource: initialValues?.incomeSource ?? '',
-    amount: initialValues?.amount ?? 0,
-    date: formatDateForInput(initialValues?.date),
-    notes: initialValues?.notes ?? '',
+const getDefaultValues = (income?: AddIncomeType): AddIncomeFormValues => ({
+    incomeSource: income?.incomeSource ?? '',
+    amount: income?.amount ?? 0,
+    date: formatDateForInput(income?.date),
+    notes: income?.notes ?? '',
 });
 
 const AddIncome: FC<IAddIncomeProps> = ({
     open,
     onSubmit,
     onClose,
-    initialValues,
-    mode = 'add',
+    income,
 }) => {
     const { t } = useTranslation();
+    const isEditMode = !!income;
 
     const validationSchema = yup.object({
         incomeSource: yup
@@ -69,10 +66,7 @@ const AddIncome: FC<IAddIncomeProps> = ({
             .max(255),
     });
 
-    const defaultValues = useMemo(
-        () => getDefaultValues(initialValues),
-        [initialValues]
-    );
+    const defaultValues = useMemo(() => getDefaultValues(income), [income]);
 
     const {
         control,
@@ -93,14 +87,14 @@ const AddIncome: FC<IAddIncomeProps> = ({
         onSubmit({
             ...values,
             amount: Number(values.amount),
-            date: new Date(values.date),
+            date: parseDate(values.date),
         });
     };
 
     return (
         <PopupDialog
             open={open}
-            title={mode === 'edit' ? t('edit') : t('addIncomeSource.title')}
+            title={isEditMode ? t('edit') : t('addIncomeSource.title')}
             onClose={onClose}
             isSubmitDisabled={!isValid}
             onSubmit={handleSubmit(handleFormSubmit)}

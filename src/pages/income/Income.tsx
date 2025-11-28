@@ -137,8 +137,7 @@ const Income = () => {
                             onClose={handleDialogClose}
                             open={isAddIncomeDialogOpen}
                             onSubmit={handleSubmitIncome}
-                            initialValues={editingIncome ?? undefined}
-                            mode={editingIncome ? 'edit' : 'add'}
+                            income={editingIncome ?? undefined}
                         />
                     )}
                 </StyledBox>

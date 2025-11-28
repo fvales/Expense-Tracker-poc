@@ -10,30 +10,12 @@ import {
     Switch,
     Typography,
 } from '@mui/material';
-import i18n from '@i18n/i18n';
 import dashboard from '@mui/icons-material/Dashboard';
 import AttachMoney from '@mui/icons-material/AttachMoney';
 import MoneyOff from '@mui/icons-material/MoneyOff';
 import { NavLink } from 'react-router';
 import useAppTheme from '@hooks/useAppTheme';
-
-const sideNavItems = [
-    {
-        name: i18n.t('dashboard'),
-        icon: dashboard,
-        path: '/',
-    },
-    {
-        name: i18n.t('income'),
-        icon: AttachMoney,
-        path: '/income',
-    },
-    {
-        name: i18n.t('expenses'),
-        icon: MoneyOff,
-        path: '/expense',
-    },
-];
+import { useTranslation } from 'react-i18next';
 
 const StyledListItem = styled(ListItem)(({ theme }) => ({
     cursor: 'pointer',
@@ -54,6 +36,25 @@ const StyledLogo = styled('img')({
 
 const SideNav = () => {
     const { toggleTheme, isDarkMode } = useAppTheme();
+    const { t } = useTranslation();
+
+    const sideNavItems = [
+        {
+            name: t('dashboard'),
+            icon: dashboard,
+            path: '/',
+        },
+        {
+            name: t('income'),
+            icon: AttachMoney,
+            path: '/income',
+        },
+        {
+            name: t('expenses'),
+            icon: MoneyOff,
+            path: '/expense',
+        },
+    ];
 
     return (
         <Drawer
