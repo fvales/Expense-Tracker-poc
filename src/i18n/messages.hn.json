@@ -13,28 +13,39 @@
     "amount": "राशि",
     "dateReceived": "प्राप्ति तिथि",
     "notes": "नोट्स",
-    "incomeSources": "आय स्रोत",
     "yourIncomeSources": "आपके आय स्रोत",
+    "incomeSources": "आय स्रोत",
     "addNewIncomeSource": "नया आय स्रोत जोड़ें",
+    "yourExpenses": "आपके खर्च",
+    "addNewExpense": "नया खर्च जोड़ें",
     "submit": "जमा करें",
     "close": "बंद करें",
     "fieldIsMandatory": "{{field}} फ़ील्ड अनिवार्य है",
-    "noIncomeDataAvailable": "चार्ट के लिए कोई आय डेटा उपलब्ध नहीं है",
+    "noDataAvailable": "चार्ट के लिए कोई डेटा उपलब्ध नहीं है",
     "month": "महीना",
     "monthlyIncome": "मासिक आय",
     "monthlyIncomeOverview": "मासिक आय अवलोकन",
+    "monthlyExpense": "मासिक खर्च",
+    "monthlyExpenseOverview": "मासिक खर्च अवलोकन",
     "addIncomeSource": {
         "title": "नया लेनदेन जोड़ें",
         "incomeSource": "आय स्रोत",
         "amount": "राशि",
-        "dateReceived": "प्राप्ति तिथि",
+        "date": "तारीख",
         "notes": "नोट्स"
     },
+    "editIncomeSource": {
+        "title": "आय स्रोत संपादित करें"
+    },
     "addExpense": {
+        "title": "नया खर्च जोड़ें",
         "description": "विवरण",
         "category": "श्रेणी",
         "date": "तारीख",
         "amount": "राशि"
+    },
+    "editExpense": {
+        "title": "खर्च संपादित करें"
     },
     "category": {
         "food": "भोजन",

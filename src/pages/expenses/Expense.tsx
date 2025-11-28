@@ -64,7 +64,7 @@ const Expense = () => {
     };
 
     return (
-        <Page title="Your Expenses">
+        <Page title={t('yourExpenses')}>
             <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
                 <CustomBarChart
                     list={expenseList}
@@ -86,14 +86,14 @@ const Expense = () => {
                         }}
                     >
                         <Typography variant="h5" gutterBottom>
-                            {t('incomeSources')}
+                            {t('yourExpenses')}
                         </Typography>
                         <Button
                             variant="contained"
                             color="primary"
                             onClick={() => setIsAddExpenseDialogOpen(true)}
                         >
-                            {t('addNewIncomeSource')}
+                            {t('addNewExpense')}
                         </Button>
                     </Box>
                     <ExpensesList

@@ -16,6 +16,8 @@
     "yourIncomeSources": "Your Income Sources",
     "incomeSources": "Income Sources",
     "addNewIncomeSource": "Add New Income Source",
+    "yourExpenses": "Your Expenses",
+    "addNewExpense": "Add New Expense",
     "close": "Close",
     "submit": "Submit",
     "fieldIsMandatory": "{{field}} field is mandatory",
@@ -29,13 +31,14 @@
         "title": "Add New Transaction",
         "incomeSource": "Income Source",
         "amount": "Amount",
-        "dateReceived": "Date Received",
+        "date": "Date",
         "notes": "Notes"
     },
     "editIncomeSource": {
         "title": "Edit Income Source"
     },
     "addExpense": {
+        "title": "Add Expense",
         "description": "Description",
         "category": "Category",
         "date": "Date",

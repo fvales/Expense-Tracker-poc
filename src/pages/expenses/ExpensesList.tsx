@@ -4,7 +4,7 @@ import type { GridColDef } from '@mui/x-data-grid';
 import { parseDate } from '@utils/date.util';
 import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import type { ExpenseType } from 'types/expense.type';
+import type { Category, ExpenseType } from 'types/expense.type';
 import EditIcon from '@mui/icons-material/Edit';
 import TrashIcon from '@mui/icons-material/Delete';
 
@@ -13,6 +13,8 @@ type ExpenseList = {
     handleDeleteExpense: (id: string) => void;
     handleEditExpense: (id: ExpenseType) => void;
 };
+
+type CategoryTranslationKey = `category.${Category}`;
 
 const ExpensesList: FC<ExpenseList> = ({
     expenseList,
@@ -39,7 +41,7 @@ const ExpensesList: FC<ExpenseList> = ({
             headerName: t('addExpense.category'),
             flex: 1,
             valueFormatter: (value) => {
-                return t(`category.${value}`);
+                return t(`category.${value}` as CategoryTranslationKey);
             },
         },
         {
