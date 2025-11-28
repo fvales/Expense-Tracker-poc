@@ -67,7 +67,7 @@ const CustomBarChart: FC<ChartProps> = ({ list, chartHeader, seriesLabel }) => {
                     display: 'flex',
                     justifyContent: 'center',
                     alignItems: 'center',
-                    minHeight: '300px',
+                    height: '400px',
                     p: 4,
                 }}
             >

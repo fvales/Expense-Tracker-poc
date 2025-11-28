@@ -10,10 +10,15 @@ import { v4 as uuid } from 'uuid';
 import CustomBarChart from '@components/CustomBarChart';
 import { useConfirm } from 'material-ui-confirm';
 
-const StyledBox = styled(Box)(() => ({
-    boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)',
-    borderRadius: '8px',
-    padding: '1rem',
+const StyledBox = styled(Box)(({ theme }) => ({
+    boxShadow:
+        theme.palette.mode === 'dark'
+            ? '0 12px 24px rgba(15, 23, 42, 0.35)'
+            : '0 8px 20px rgba(15, 23, 42, 0.12)',
+    borderRadius: '16px',
+    padding: '1.25rem',
+    border: `1px solid ${theme.palette.divider}`,
+    backgroundColor: theme.palette.background.paper,
 }));
 
 const Income = () => {
@@ -114,8 +119,10 @@ const Income = () => {
 
                     <Box
                         sx={{
-                            minHeight: { xs: 400, md: 520 },
+                            minHeight: { xs: 360, md: 480 },
+                            maxHeight: { xs: 500, lg: 640 },
                             overflowY: 'auto',
+                            pr: 1,
                         }}
                     >
                         <IncomeList
